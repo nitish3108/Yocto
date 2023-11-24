@@ -20,5 +20,5 @@ Build command
     <img width="406" alt="image" src="https://github.com/nitish3108/Yocto/assets/98373896/31f4b87d-400a-4688-a7c2-a86f4308a2d6">
     
       * bitbake core-image-sato
-  # once you are successfully able to build the yocto container you can run to test the image
+  # Once you are successfully able to build the yocto container you can run to test the image
       * runqemu qemux86-64
