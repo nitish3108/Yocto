@@ -6,4 +6,4 @@ services:
         container_name: buildImage
         volumes:
             - /mnt/d/Linux_Training_program/Yocto/Yocto/poky:/home/source
-            - /mnt/d/Linux_Training_program/Yocto/Yocto/source:/home/source/
+            - /mnt/d/Linux_Training_program/Yocto/Yocto/source:/home/meta-extrare-pository/

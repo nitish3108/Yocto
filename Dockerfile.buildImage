@@ -6,7 +6,7 @@ RUN apt-get update
 
 # Install essential packages for Yocto and QEMU, use --fix-missing option
 RUN apt-get install -y --no-install-recommends --fix-missing \
-    gawk wget git diffstat unzip texinfo gcc make build-essential chrpath socat tar \
+    dos2unix gawk wget git diffstat unzip texinfo gcc make build-essential chrpath socat tar \
     python3 python3-pip python3-pexpect xz-utils debianutils iputils-ping \
     python3-git python3-jinja2 libegl1-mesa libsdl2-dev python3-subunit \
     mesa-common-dev zstd liblz4-dev file locales acl
@@ -30,4 +30,6 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 # Replace dash with bash
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
-ENTRYPOINT sleep "infinity"
+COPY ./entrypoint.sh /usr/local/bin
+
+ENTRYPOINT ["entrypoint.sh"]
