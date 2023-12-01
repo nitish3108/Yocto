@@ -1,0 +1,9 @@
+version: "3.7"
+
+services:
+    yocto:
+        image: nitishyoctobuildsystem:0.01
+        container_name: buildImage
+        volumes:
+            - /mnt/d/Linux_Training_program/Yocto/Yocto/poky:/home/source
+            - /mnt/d/Linux_Training_program/Yocto/Yocto/source:/home/source/
