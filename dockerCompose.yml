@@ -1,0 +1,12 @@
+
+services:
+	container:
+		build:
+			context: docker_container
+			target: nitishyoctobuildsystem
+		volume:
+			/var/source/:/mnt/d/Linux_Training_program/Yocto/Yocto
+
+	
+
+
