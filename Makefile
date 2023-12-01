@@ -4,13 +4,12 @@ tag := 0.01
 DOCKERFILE := Dockerfile.buildImage
 
 DOCKER := docker
-DOCKER_BUILD := $(DOCKER) build
 
 build:
-	$(DOCKER_BUILD) -t $(IMAGE_NAME):$(tag) -f $(DOCKERFILE) .
+	docker image build -t $(IMAGE_NAME):$(tag) -f $(DOCKERFILE) .
 
 clean:
-	$(DOCKER) rmi $(IMAGE_NAME):$(TAG)
+	$(DOCKER) rmi $(IMAGE_NAME):$(tag)
 
 help:
 	@echo "Available targets:"
