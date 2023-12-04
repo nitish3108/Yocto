@@ -1,15 +1,29 @@
-# Use the official Ubuntu 16.04 image
+# Use the official Ubuntu 18.04 image
 FROM ubuntu:18.04
+
+USER root
 
 # Use the default repositories
 RUN apt-get update
 
 # Install essential packages for Yocto and QEMU, use --fix-missing option
 RUN apt-get install -y --no-install-recommends --fix-missing \
-    dos2unix gawk wget git diffstat unzip texinfo gcc make build-essential chrpath socat tar \
+    dos2unix gawk wget cpio git diffstat unzip texinfo gcc-8 g++-8 make build-essential chrpath socat tar \
     python3 python3-pip python3-pexpect xz-utils debianutils iputils-ping \
     python3-git python3-jinja2 libegl1-mesa libsdl2-dev python3-subunit \
-    mesa-common-dev zstd liblz4-dev file locales acl
+    mesa-common-dev zstd liblz4-tool file locales acl
+
+# Search for lz4-related packages
+RUN apt-cache search lz4
+
+# Install the ssl certificate
+RUN apt-get install -y ca-certificates
+
+RUN apt-get install -y software-properties-common
+RUN add-apt-repository ppa:deadsnakes/ppa -y
+RUN apt-get install -y python3.8
+RUN ln -s /usr/bin/python3.8 /usr/bin/python
+RUN apt-get install -y python3-pip
 
 # Set up locales
 RUN dpkg-reconfigure locales && \
@@ -17,12 +31,16 @@ RUN dpkg-reconfigure locales && \
     update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
 ENV LANG en_US.utf8
 
-# Install the ssl certificate
-RUN apt-get install -y ca-certificates
-
 # Install repo
 RUN wget https://storage.googleapis.com/git-repo-downloads/repo -P /usr/local/bin/ && \
     chmod a+x /usr/local/bin/repo
+
+# Create a non-root user
+RUN useradd -ms /bin/bash buildServer
+
+# setting python version 3.8 as default environment variable
+RUN ln -sf /usr/bin/pip3 /usr/bin/pip && \
+    ln -sf /usr/bin/python3.8 /usr/bin/python3
 
 # Clean up APT cache and temporary files
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
@@ -30,6 +48,21 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 # Replace dash with bash
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
-COPY ./entrypoint.sh /usr/local/bin
+# Create a symbolic link for /usr/bin/python3
+RUN rm /usr/bin/python3 && \
+    ln -s /usr/bin/python3.8 /usr/bin/python3
 
-ENTRYPOINT ["entrypoint.sh"]
+# Changing password
+RUN echo 'root:buildServer' | chpasswd
+
+# Copying the entrypoint.sh file
+COPY ./entrypoint.sh /home/
+
+# Switch to the non-root user
+USER buildServer
+
+# Set the working directory
+WORKDIR /home/
+
+ENTRYPOINT sleep infinity
+

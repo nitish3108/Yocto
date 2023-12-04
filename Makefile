@@ -1,7 +1,7 @@
 
 IMAGE_NAME := nitishyoctobuildsystem
 tag := 0.01
-DOCKERFILE := Dockerfile.buildImage
+DOCKERFILE := Dockerfile.newBuildImage
 TIMEOUT := 15
 DOCKER := docker
 IMAGE := buildImage
