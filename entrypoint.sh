@@ -8,4 +8,4 @@ cd poky
 source oe-init-build-env
 
 bitbake core-image-minimal
-ENTRYPOINT sleep "infinity"
+#ENTRYPOINT sleep "infinity"
