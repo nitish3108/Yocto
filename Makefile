@@ -45,8 +45,11 @@ execute:
 # Display all th epossible command
 help:
 	@echo "Available targets:"
-	@echo "  make build       - Build Docker image"
-	@echo "  make clean       - Remove Docker image"
-	@echo "  make help        - Show this help message"
-
+	@echo "  make build       		- Build Docker image"
+	@echo "  make clean       		- Remove Docker image"
+	@echo "  make help        		- Show this help message"
+	@echo "  make execute     		- stop container, remove, rebuild image, and enter inside the docker container "
+	@echo "  make docker_compose_up        	- start the docker compost file"
+	@echo "  make docker_compose_restart    - if docker compose file crash it will restart the container with all other mounting"
+	@echo ""
 .DEFAULT_GOAL := help
