@@ -1,11 +1,27 @@
-#!/bin/env bash
+#!/usr/bin/env bash
 
-git clone git://git.yoctoproject.org/poky
-sleep 10
+set -e
 
-cd poky
+usage() {
+  echo "Usage: $0 <target-directory>"
+}
 
-source oe-init-build-env
+if [ $# -ne 1 ]; then
+  usage
+  exit 1
+fi
 
-bitbake core-image-minimal
-#ENTRYPOINT sleep "infinity"
+directory=$1
+
+if [ -e "${directory}" ]; then
+  echo "Error: \"${directory}\" already exists."
+  usage
+fi
+
+# create the directory
+mkdir -p "${directory}/sources" && cd "${directory}"
+
+# clone poky and other layers
+git clone git://git.yoctoproject.org/poky sources/poky
+
+echo "Done, type \"cd ${directory} && . ./sources/poky/oe-init-build-env\" to create the build environment"

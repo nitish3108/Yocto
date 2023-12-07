@@ -57,16 +57,17 @@ RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 #    ln -s /usr/bin/python3.8 /usr/bin/python3
 
 # Changing password
-#RUN echo 'root:buildServer' | chpasswd
-
-# Copying the entrypoint.sh file
-COPY ./entrypoint.sh /home/
+RUN echo 'root:buildServer' | chpasswd
 
 # Switch to the non-root user
 USER buildServer
 
-# Set the working directory
-WORKDIR /home/
+# Copying the entrypoint.sh file
+COPY ./entrypoint.sh /home/buildServer
 
+# Set the working directory
+WORKDIR /home/buildServer
+
+#ENTRYPOINT ["sh", "/home/buildServer/entrypoint.sh"]
 ENTRYPOINT sleep infinity
 

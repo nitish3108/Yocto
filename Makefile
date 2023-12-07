@@ -37,6 +37,7 @@ execute:
 	make all_clean || echo "No existing docker container"
 	make build
 	-timeout -k 1 $(TIMEOUT) make docker_compose_up || { echo "docker_compose_up failed"; exit 1; } 
+	#make docker_compose_up || { echo "docker_compose_up failed"; exit 1; } 
 	@echo "Sleeping for 5 second"
 	make container_sleep
 	make docker_compose_restart

@@ -12,6 +12,7 @@ Build command
   Enter into the poky directory and follow following command:
     * cd poky
     * git branch -a
+    * export PSEUDO_DISABLED=1
     * git pull
 
   Build 
