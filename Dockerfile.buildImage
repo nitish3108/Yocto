@@ -10,24 +10,12 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # Install essential packages for Yocto and QEMU, use --fix-missing option
 RUN apt-get install -y --no-install-recommends --fix-missing \
-    dos2unix gawk wget cpio git diffstat unzip texinfo gcc make build-essential chrpath socat tar \
+    dos2unix vim gawk wget cpio git diffstat unzip texinfo gcc make build-essential chrpath socat tar \
     python3 python3-pip python3-pexpect xz-utils debianutils iputils-ping \
     python3-git python3-jinja2 libegl1-mesa libsdl2-dev python3-subunit \
     mesa-common-dev zstd liblz4-tool file locales acl
 
 ENV DEBIAN_FRONTEND=
-
-# Search for lz4-related packages
-#RUN apt-cache search lz4
-
-# Install the ssl certificate
-#RUN apt-get install -y ca-certificates
-
-#RUN apt-get install -y software-properties-common
-#RUN add-apt-repository ppa:deadsnakes/ppa -y
-#RUN apt-get install -y python3.8
-#RUN ln -s /usr/bin/python3.8 /usr/bin/python
-#RUN apt-get install -y python3-pip
 
 # Set up locales
 RUN dpkg-reconfigure locales && \
@@ -42,19 +30,11 @@ RUN wget https://storage.googleapis.com/git-repo-downloads/repo -P /usr/local/bi
 # Create a non-root user
 RUN useradd -ms /bin/bash buildServer
 
-# setting python version 3.8 as default environment variable
-#RUN ln -sf /usr/bin/pip3 /usr/bin/pip && \
-#    ln -sf /usr/bin/python3.8 /usr/bin/python3
-
 # Clean up APT cache and temporary files
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Replace dash with bash
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
-
-# Create a symbolic link for /usr/bin/python3
-#RUN rm /usr/bin/python3 && \
-#    ln -s /usr/bin/python3.8 /usr/bin/python3
 
 # Changing password
 RUN echo 'root:buildServer' | chpasswd

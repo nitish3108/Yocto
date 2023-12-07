@@ -5,4 +5,4 @@ services:
         image: nitishyoctobuildsystem:0.01
         container_name: buildImage
         volumes:
-            - ./source:/home/extra/
+            - ./sources:/home/buildServer/source
