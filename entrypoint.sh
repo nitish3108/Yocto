@@ -22,6 +22,6 @@ fi
 mkdir -p "${directory}/sources" && cd "${directory}"
 
 # clone poky and other layers
-git clone git://git.yoctoproject.org/poky sources/poky
+git clone -b nanbield git://git.yoctoproject.org/poky sources/poky
 
 echo "Done, type \"cd ${directory} && . ./sources/poky/oe-init-build-env\" to create the build environment"

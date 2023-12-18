@@ -3,6 +3,9 @@ version: "3.7"
 services:
     yocto:
         image: nitishyoctobuildsystem:0.01
+        privileged: true
+        devices:
+            - /dev/net/tun
         container_name: buildImage
         volumes:
             - ./sources:/home/buildServer/source
