@@ -7,8 +7,8 @@ DOCKER := docker
 IMAGE := buildImage
 
 # RUN with sleep
-container_sleep:
-	sleep 5
+#container_sleep:
+#	sleep 5
 
 # To build the docker container
 build:
