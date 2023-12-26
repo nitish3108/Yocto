@@ -50,4 +50,7 @@ help:
 	@echo "  make docker_compose_up        	- start the docker compost file"
 	@echo "  make docker_compose_restart    - if docker compose file crash it will restart the container with all other mounting"
 	@echo ""
+
 .DEFAULT_GOAL := help
+
+#adding something to push to understand the hooks
