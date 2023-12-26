@@ -38,8 +38,6 @@ execute:
 	make build
 	#-timeout -k 1 $(TIMEOUT) make docker_compose_up || { echo "docker_compose_up failed"; exit 1; } 
 	make docker_compose_up || { echo "docker_compose_up failed"; exit 1; } 
-	#make container_sleep
-	#make docker_compose_restart
 	$(DOCKER) exec -it $(IMAGE) /bin/bash
 
 # Display all th epossible command
