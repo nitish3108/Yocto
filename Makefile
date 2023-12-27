@@ -12,7 +12,7 @@ IMAGE := buildImage
 
 # To build the docker container
 build:
- 	$(DOCKER) image build -t $(IMAGE_NAME):$(tag) -f $(DOCKERFILE) .
+	$(DOCKER) image build -t $(IMAGE_NAME):$(tag) -f $(DOCKERFILE) .
 
 # To clean the build docker image
 clean:
