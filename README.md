@@ -23,3 +23,5 @@ Build command
       * bitbake core-image-sato
   # Once you are successfully able to build the yocto container you can run to test the image
       * runqemu qemux86-64
+
+  We can change the machine based on our requirement
