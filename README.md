@@ -26,3 +26,6 @@ Build command
       * runqemu qemux86-64
 
   We can change the machine based on our requirement
+
+# Date: 03/01/2023
+Adding further steps to add this repo to build from Jenkins and implement CICD
