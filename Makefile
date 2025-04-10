@@ -12,7 +12,7 @@ IMAGE := buildImage
 
 # To build the docker container
 build:
- 	$(DOCKER) image build -t $(IMAGE_NAME):$(tag) -f $(DOCKERFILE) .
+	$(DOCKER) image build -t $(IMAGE_NAME):$(tag) -f $(DOCKERFILE) .
 
 # To clean the build docker image
 clean:
@@ -26,7 +26,7 @@ all_clean:
 
 # To start the docker compose
 docker_compose_up:
-	$(DOCKER) compose up -d 
+	$(DOCKER)-compose up -d 
 
 docker_compose_restart:
 	$(DOCKER) compose stop
